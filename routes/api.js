@@ -84,7 +84,7 @@ router.get('/items', function (req, res) {
                 let item = new Item(element.id, element.title, element.currency_id, element.price, 2, element.thumbnail, element.condition, element.shipping.free_shipping);
                 items.push(item);
             });
-            data.available_filters.forEach(element => {
+            data.filters.forEach(element => {
                 if (element.id == "category") {
                     element.values.forEach(elementCategory => {
                         if (elementCategory.name) {
@@ -93,6 +93,8 @@ router.get('/items', function (req, res) {
                     });
                 }
             });
+            categorias.splice(0,1);
+            items.splice(0,1);
             res.send(new Results(author, categorias, items));
         });
     }).on('error', (e) => {
